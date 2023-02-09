@@ -12,12 +12,9 @@ export const actionNome = (nome) => ({
 });
 
 export const fetchToken = () => async (dispatch) => {
-    const DATA_API = 'https://opentdb.com/api_token.php?command=request';
-    const response = await fetch(DATA_API);
-    const { token } = await response.json();
-    localStorage.setItem('token', token);
-    dispatch(actionToken(token));
+  const DATA_API = 'https://opentdb.com/api_token.php?command=request';
+  const response = await fetch(DATA_API);
+  const { token } = await response.json();
+  localStorage.setItem('token', token);
+  dispatch(actionToken(token));
   };
-
-
-

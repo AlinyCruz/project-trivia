@@ -3,7 +3,7 @@ import { CAPTURA_NOME, CAPTURA_TOKEN } from '../actions';
 // Esse reducer será responsável por tratar as informações da pessoa usuária
 const INITIAL_STATE = {
   nome: '',
-  token:'',
+  token: '',
 };
 
 export const user = (state = INITIAL_STATE, action) => {
@@ -13,11 +13,11 @@ export const user = (state = INITIAL_STATE, action) => {
       ...state,
       token: action.tokens,
     };
-    case CAPTURA_NOME:
-      return {
-        ...state,
-        nome: action.nome,
-      };
+  case CAPTURA_NOME:
+    return {
+      ...state,
+      nome: action.nome,
+    };
   default:
     return state;
   }

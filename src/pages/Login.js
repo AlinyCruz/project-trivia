@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from 'react';
 import { connect } from 'react-redux';
 import { actionNome, fetchToken } from '../redux/actions';
@@ -45,7 +46,7 @@ class Login extends React.Component {
   proximaPagina = (rota) => {
     const { history, dispatch } = this.props;
     const { nome, token } = this.state;
-    dispatch(fetchToken(token))
+    dispatch(fetchToken(token));
     dispatch(actionNome(nome));
     return history.push(rota);
   };
@@ -81,6 +82,13 @@ class Login extends React.Component {
       </div>
     );
   }
+}
+
+Login.propTypes = {
+  dispatch: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
 }
 
 export default connect()(Login);
