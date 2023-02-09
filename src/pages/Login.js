@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { actionNome, fetchToken } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -41,6 +42,14 @@ class Login extends React.Component {
     return dataValidate;
   };
 
+  proximaPagina = (rota) => {
+    const { history, dispatch } = this.props;
+    const { nome, token } = this.state;
+    dispatch(fetchToken(token))
+    dispatch(actionNome(nome));
+    return history.push(rota);
+  };
+
   render() {
     const { email, name, isDisabled } = this.state;
     return (
@@ -64,6 +73,7 @@ class Login extends React.Component {
             type="button"
             disabled={ isDisabled }
             data-testid="btn-play"
+            onClick={ () => this.proximaPagina('/game') }
           >
             Play
           </button>
