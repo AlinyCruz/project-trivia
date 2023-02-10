@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { actionNome, fetchToken } from '../redux/actions';
@@ -85,10 +85,10 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  dispatch: PropTypes.func,
+  dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func
-  })
-}
+    push: PropTypes.func,
+  }).isRequired
+};
 
 export default connect()(Login);

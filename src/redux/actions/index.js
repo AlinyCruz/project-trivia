@@ -17,4 +17,4 @@ export const fetchToken = () => async (dispatch) => {
   const { token } = await response.json();
   localStorage.setItem('token', token);
   dispatch(actionToken(token));
-  };
+};
