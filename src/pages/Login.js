@@ -11,10 +11,11 @@ class Login extends React.Component {
   };
 
   handleChange = ({ target }) => {
-    const { name, value } = target;
-
+  // const { name, value } = target;
+    const alvo = target.value;
+    const inputAlvo = target.name;
     this.setState({
-      [name]: value,
+      [inputAlvo]: alvo,
     }, () => this.validate());
   };
 
@@ -45,9 +46,9 @@ class Login extends React.Component {
 
   paginaGame = (rota) => {
     const { history, dispatch } = this.props;
-    const { nome, token } = this.state;
+    const { name, token, email } = this.state;
     dispatch(fetchToken(token));
-    dispatch(actionNome(nome));
+    dispatch(actionNome(name, email));
     return history.push(rota);
   };
 
