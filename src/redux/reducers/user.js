@@ -4,6 +4,8 @@ import { CAPTURA_NOME, CAPTURA_TOKEN } from '../actions';
 const INITIAL_STATE = {
   nome: '',
   token: '',
+  email: '',
+  score: 0,
 };
 
 export const user = (state = INITIAL_STATE, action) => {

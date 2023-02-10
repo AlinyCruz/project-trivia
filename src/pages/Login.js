@@ -58,7 +58,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { email, name, isDisabled } = this.state;
+    const { email, nome, isDisabled } = this.state;
     return (
       <div>
         <form>
@@ -71,7 +71,7 @@ class Login extends React.Component {
           />
           <input
             name="name"
-            value={ name }
+            value={ nome }
             type="text"
             onChange={ this.handleChange }
             data-testid="input-player-name"
