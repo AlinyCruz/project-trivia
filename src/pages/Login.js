@@ -43,11 +43,16 @@ class Login extends React.Component {
     return dataValidate;
   };
 
-  proximaPagina = (rota) => {
+  paginaGame = (rota) => {
     const { history, dispatch } = this.props;
     const { nome, token } = this.state;
     dispatch(fetchToken(token));
     dispatch(actionNome(nome));
+    return history.push(rota);
+  };
+
+  paginaSetting  = (rota) => {
+    const { history } = this.props;
     return history.push(rota);
   };
 
@@ -74,9 +79,17 @@ class Login extends React.Component {
             type="button"
             disabled={ isDisabled }
             data-testid="btn-play"
-            onClick={ () => this.proximaPagina('/game') }
+            onClick={ () => this.paginaGame('/game') }
           >
             Play
+          </button>
+
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => this.paginaSetting('/settings') }
+          >
+            Configurações
           </button>
         </form>
       </div>
