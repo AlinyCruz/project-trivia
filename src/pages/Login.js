@@ -51,7 +51,7 @@ class Login extends React.Component {
     return history.push(rota);
   };
 
-  paginaSetting  = (rota) => {
+  paginaSetting = (rota) => {
     const { history } = this.props;
     return history.push(rota);
   };
