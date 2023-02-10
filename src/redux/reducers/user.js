@@ -8,15 +8,15 @@ const INITIAL_STATE = {
 
 export const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case CAPTURA_TOKEN:
-    return {
-      ...state,
-      token: action.tokens,
-    };
   case CAPTURA_NOME:
     return {
       ...state,
       nome: action.nome,
+    };
+  case CAPTURA_TOKEN:
+    return {
+      ...state,
+      token: action.tokens,
     };
   default:
     return state;
