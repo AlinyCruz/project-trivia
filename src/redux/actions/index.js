@@ -6,9 +6,10 @@ export const actionToken = (tokens) => ({
   tokens,
 });
 
-export const actionNome = (nome) => ({
+export const actionNome = (name, email) => ({
   type: CAPTURA_NOME,
-  nome,
+  name,
+  email,
 });
 
 export const fetchToken = () => async (dispatch) => {

@@ -46,9 +46,9 @@ class Login extends React.Component {
 
   paginaGame = (rota) => {
     const { history, dispatch } = this.props;
-    const { nome, token } = this.state;
+    const { name, token, email } = this.state;
     dispatch(fetchToken(token));
-    dispatch(actionNome(nome));
+    dispatch(actionNome(name, email));
     return history.push(rota);
   };
 
@@ -58,7 +58,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { email, nome, isDisabled } = this.state;
+    const { email, name, isDisabled } = this.state;
     return (
       <div>
         <form>
@@ -71,7 +71,7 @@ class Login extends React.Component {
           />
           <input
             name="name"
-            value={ nome }
+            value={ name }
             type="text"
             onChange={ this.handleChange }
             data-testid="input-player-name"
