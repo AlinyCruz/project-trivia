@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class Game extends React.Component {
   render() {
     return (
-      <div>Você esta na pagina do Jogo!!!</div>
+      <h2>Você esta na pagina do Jogo!!!</h2>
     );
   }
 }
