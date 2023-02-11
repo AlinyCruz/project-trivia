@@ -44,10 +44,11 @@ class Login extends React.Component {
     return dataValidate;
   };
 
-  paginaGame = (rota) => {
+  paginaGame = async (rota) => {
     const { history, dispatch } = this.props;
-    const { name, token, email } = this.state;
-    dispatch(fetchToken(token));
+    const { name, email } = this.state;
+    // dispatch(fetchToken(token));
+    await fetchToken();
     dispatch(actionNome(name, email));
     return history.push(rota);
   };
