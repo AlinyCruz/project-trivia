@@ -59,7 +59,7 @@ class MainGame extends React.Component {
           {resposta && resposta?.map((dado, i) => (
             <button
               key={ i }
-              data-testid={ dado === dados[i]
+              data-testid={ dado === dados[0]
                 .correct_answer ? 'correct-answer' : `wrong-answer-${i}` }
             >
               { dado }
