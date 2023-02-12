@@ -1,43 +1,95 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Timer from './Timer';
-// import PropTypes from 'prop-types';
-// import md5 from 'crypto-js/md5';
+import PropTypes from 'prop-types';
+import './MainGame.css';
+
+const numero = 0.5;
+const opcoes = [];
 
 class MainGame extends React.Component {
+  state = {
+    dados: [],
+    resposta: [],
+    habilitBorder: false,
+  };
+
+  async componentDidMount() {
+    const { history } = this.props;
+
+    try {
+      const recoveryToken = localStorage.getItem('token');
+      console.log(recoveryToken);
+      const url = `https://opentdb.com/api.php?amount=5&token=${recoveryToken}`;
+      const response = await fetch(url);
+      const dataQuestion = await response.json();
+      const codeResponse = 3;
+
+      if (dataQuestion.response_code === codeResponse) {
+        console.log('entrou');
+        localStorage.removeItem('token');
+        return history.push('/');
+      }
+      this.setState({
+        dados: dataQuestion.results,
+      }, () => this.criaOpcoes());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  embaralhar = (xablau) => xablau.sort(() => Math.random() - numero);
+
+  criaOpcoes = () => {
+    const { dados } = this.state;
+    opcoes.push(...dados[0].incorrect_answers.map((e) => e));
+    opcoes.push(dados[0].correct_answer);
+    this.setState({
+      resposta: this.embaralhar(opcoes),
+    });
+  };
+
+  handleClick = () => {
+    // const { habilitBorder } = this.state;
+    this.setState({
+      habilitBorder: true,
+
+    });
+  };
+
   render() {
-    // const { name, score, gravatarEmail } = this.props;
-    // console.log(gravatarEmail);
-    // const hash = md5(gravatarEmail).toString();
-    // const url = `https://www.gravatar.com/avatar/${hash}`;
+    const { dados, resposta, habilitBorder } = this.state;
+    console.log(dados[0]?.question);
     return (
       <div>
-        Eu sou a main Game!!!
-        <header>
-          {/* <div>
-            <img src={ url } alt="gravatar" data-testid="header-profile-picture" />
-          </div>
-          Bem Vindo,
-          <h3 data-testid="header-player-name">
-            { name }
-          </h3>
-          <p data-testid="header-score">{ score }</p> */}
-          <Timer />
-        </header>
+        <div>
+          <p data-testid="question-text">{dados[0]?.question}</p>
+          <p data-testid="question-category">{dados[0]?.category}</p>
+        </div>
+        <div data-testid="answer-options">
+          {resposta && resposta?.map((dado, i) => (
+            <button
+              key={ i }
+              data-testid={ dado === dados[0]
+                .correct_answer ? 'correct-answer' : `wrong-answer-${i}` }
+              onClick={
+                () => this.handleClick()
+              }
+              className={ habilitBorder && (dado === dados[0]
+                .correct_answer ? 'green' : 'red') }
+            >
+              { dado }
+            </button>
+          ))}
+        </div>
       </div>
     );
   }
 }
-// const mapStateToProps = (state) => ({
-//   name: state.player.name,
-//   gravatarEmail: state.player.gravatarEmail,
-//   score: state.player.score,
-// });
 
-// Header.propTypes = {
-//   score: PropTypes.number.isRequired,
-//   name: PropTypes.string.isRequired,
-//   gravatarEmail: PropTypes.string.isRequired,
-// }.isRequired;
+MainGame.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+}.isRequired;
 
 export default connect()(MainGame);
