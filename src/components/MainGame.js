@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import './MainGame.css';
 
 const numero = 0.5;
 const opcoes = [];
@@ -9,6 +10,7 @@ class MainGame extends React.Component {
   state = {
     dados: [],
     resposta: [],
+    habilitBorder: false,
   };
 
   async componentDidMount() {
@@ -46,8 +48,16 @@ class MainGame extends React.Component {
     });
   };
 
+  handleClick = () => {
+    // const { habilitBorder } = this.state;
+    this.setState({
+      habilitBorder: true,
+
+    });
+  };
+
   render() {
-    const { dados, resposta } = this.state;
+    const { dados, resposta, habilitBorder } = this.state;
     console.log(dados[0]?.question);
     return (
       <div>
@@ -61,6 +71,11 @@ class MainGame extends React.Component {
               key={ i }
               data-testid={ dado === dados[0]
                 .correct_answer ? 'correct-answer' : `wrong-answer-${i}` }
+              onClick={
+                () => this.handleClick()
+              }
+              className={ habilitBorder && (dado === dados[0]
+                .correct_answer ? 'green' : 'red') }
             >
               { dado }
             </button>
