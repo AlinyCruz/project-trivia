@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Timer from './Timer';
 // import PropTypes from 'prop-types';
 // import md5 from 'crypto-js/md5';
 
@@ -21,6 +22,7 @@ class MainGame extends React.Component {
             { name }
           </h3>
           <p data-testid="header-score">{ score }</p> */}
+          <Timer />
         </header>
       </div>
     );
