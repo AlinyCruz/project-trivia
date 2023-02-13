@@ -13,7 +13,6 @@ class MainGame extends React.Component {
     resposta: [],
     habilitBorder: false,
     nextBtn: false,
-    pergunta: 0,
     isDisabled: false,
   };
 
@@ -69,7 +68,7 @@ class MainGame extends React.Component {
   };
 
   render() {
-    const { dados, resposta, habilitBorder, nextBtn, pergunta, isDisabled } = this.state;
+    const { dados, resposta, habilitBorder, nextBtn, isDisabled } = this.state;
     console.log(dados[0]?.question);
     return (
       <div>
@@ -78,7 +77,6 @@ class MainGame extends React.Component {
           <p data-testid="question-category">{dados[0]?.category}</p>
         </div>
         <div data-testid="answer-options">
-          { pergunta}
           {resposta && resposta?.map((dado, i) => (
             <button
               key={ i }
