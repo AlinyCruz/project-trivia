@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './MainGame.css';
+import Timer from './Timer';
 
 const numero = 0.5;
 const opcoes = [];
@@ -11,6 +12,7 @@ class MainGame extends React.Component {
     dados: [],
     resposta: [],
     habilitBorder: false,
+    isDisabled: false,
   };
 
   async componentDidMount() {
@@ -56,8 +58,15 @@ class MainGame extends React.Component {
     });
   };
 
+  handleTimer = () => {
+    this.setState({
+      isDisabled: true,
+
+    });
+  };
+
   render() {
-    const { dados, resposta, habilitBorder } = this.state;
+    const { dados, resposta, habilitBorder, isDisabled } = this.state;
     console.log(dados[0]?.question);
     return (
       <div>
@@ -76,11 +85,13 @@ class MainGame extends React.Component {
               }
               className={ habilitBorder && (dado === dados[0]
                 .correct_answer ? 'green' : 'red') }
+              disabled={ isDisabled }
             >
               { dado }
             </button>
           ))}
         </div>
+        <Timer handleTimer={ this.handleTimer } />
       </div>
     );
   }
