@@ -13,8 +13,6 @@ class MainGame extends React.Component {
     dados: [],
     resposta: [],
     habilitBorder: false,
-    nextBtn: false,
-    isDisabled: false,
   };
 
   async componentDidMount() {
@@ -93,14 +91,6 @@ class MainGame extends React.Component {
     // const { habilitBorder } = this.state;
     this.setState({
       habilitBorder: true,
-      nextBtn: true,
-
-    });
-  };
-
-  handleTimer = () => {
-    this.setState({
-      isDisabled: true,
 
     });
     this.handleScore(isCorrect);
@@ -127,21 +117,11 @@ class MainGame extends React.Component {
               }
               className={ habilitBorder && (dado === dados[0]
                 .correct_answer ? 'green' : 'red') }
-              disabled={ isDisabled }
             >
               { dado }
             </button>
           ))}
         </div>
-        { nextBtn && (
-          <button
-            data-testid="btn-next"
-          >
-            Next
-          </button>
-        )}
-
-        <Timer handleTimer={ this.handleTimer } />
       </div>
     );
   }
