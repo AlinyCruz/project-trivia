@@ -1,4 +1,4 @@
-import { CAPTURA_NOME } from '../actions';
+import { CAPTURA_NOME, IMPLEMENT_SCORE } from '../actions';
 
 // Esse reducer será responsável por tratar as informações da pessoa usuária
 const INITIAL_STATE = {
@@ -22,6 +22,12 @@ export const user = (state = INITIAL_STATE, action) => {
   //     ...state,
   //     token: action.tokens,
   //   };
+  case IMPLEMENT_SCORE:
+    return ({
+      ...state,
+      score: action.score,
+      assertions: state.assertions + action.assertions,
+    });
   default:
     return state;
   }

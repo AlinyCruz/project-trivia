@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './MainGame.css';
 import Timer from './Timer';
+import { implementScore } from '../redux/actions';
 
 const numero = 0.5;
 const opcoes = [];
@@ -21,14 +22,12 @@ class MainGame extends React.Component {
 
     try {
       const recoveryToken = localStorage.getItem('token');
-      console.log(recoveryToken);
       const url = `https://opentdb.com/api.php?amount=5&token=${recoveryToken}`;
       const response = await fetch(url);
       const dataQuestion = await response.json();
       const codeResponse = 3;
 
       if (dataQuestion.response_code === codeResponse) {
-        console.log('entrou');
         localStorage.removeItem('token');
         return history.push('/');
       }
@@ -51,7 +50,46 @@ class MainGame extends React.Component {
     });
   };
 
-  handleClick = () => {
+  handleScore = (isCorrect) => {
+    const { dados } = this.state;
+    const { time, score, dispatch } = this.props;
+    const formula = 10;
+    console.log(isCorrect, 'isCorrect');
+    if (isCorrect === 'correct-answer') {
+      const questionsArray = dados[0];
+      console.log(questionsArray);
+      const difficultyQuestion = questionsArray.difficulty;
+      const valueDifficulty = { hard: 3, medium: 2, easy: 1 };
+      const scoreValue = formula + (time * valueDifficulty[difficultyQuestion]);
+      const sum = score + scoreValue;
+      dispatch(implementScore(sum, 1));
+      this.setState({
+        expired: true,
+      });
+    } else {
+      this.setState({
+        expired: true,
+      });
+    }
+  };
+
+  //  handleResponse = () => {
+  //  this.setState({
+  //  response: true,
+  //  freeze: true,
+  //  counting: false,
+  //  });
+  //  };
+
+  //  expireQuestion = () => {
+  //  this.setState({
+  //  expired: true,
+  //  counting: false,
+  //  freeze: true,
+  //  });
+  // };
+
+  handleClick = (isCorrect) => {
     // const { habilitBorder } = this.state;
     this.setState({
       habilitBorder: true,
@@ -65,6 +103,7 @@ class MainGame extends React.Component {
       isDisabled: true,
 
     });
+    this.handleScore(isCorrect);
   };
 
   render() {
@@ -83,7 +122,8 @@ class MainGame extends React.Component {
               data-testid={ dado === dados[0]
                 .correct_answer ? 'correct-answer' : `wrong-answer-${i}` }
               onClick={
-                () => this.handleClick()
+                () => this.handleClick(dado === dados[0]
+                  .correct_answer ? 'correct-answer' : `wrong-answer-${i}`)
               }
               className={ habilitBorder && (dado === dados[0]
                 .correct_answer ? 'green' : 'red') }
@@ -110,6 +150,7 @@ class MainGame extends React.Component {
 MainGame.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
+    dispatch: PropTypes.func,
   }),
 }.isRequired;
 
