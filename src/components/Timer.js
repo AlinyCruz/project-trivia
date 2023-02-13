@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 class Timer extends React.Component {
@@ -20,6 +21,8 @@ class Timer extends React.Component {
   componentDidUpdate(_prevProps, prevState) {
     const SECONDS = 0;
     if (prevState.seconds === SECONDS) {
+      const { handleTimer } = this.props;
+      handleTimer();
       this.setState({ seconds: 30 });
     }
   }
@@ -35,4 +38,9 @@ class Timer extends React.Component {
     );
   }
 }
+
+Timer.propTypes = {
+  handleTimer: PropTypes.func,
+}.isRequired;
+
 export default Timer;

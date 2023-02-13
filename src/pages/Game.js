@@ -24,12 +24,7 @@ class Game extends React.Component {
     return (
       <div>
         <Header />
-<<<<<<< HEAD
-        <h2>Você esta na pagina do Jogo!!!</h2>
-        <MainGame />
-=======
         <MainGame history={ history } />
->>>>>>> main-group-10
       </div>
     );
   }
