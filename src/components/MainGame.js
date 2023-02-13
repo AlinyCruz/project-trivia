@@ -7,13 +7,18 @@ import { implementScore } from '../redux/actions';
 
 const numero = 0.5;
 const opcoes = [];
+const CORRECT_ANSWER = 'correct-answer';
 
 class MainGame extends React.Component {
   state = {
     dados: [],
     resposta: [],
     habilitBorder: false,
+    nextBtn: false,
+    isDisabled: false,
   };
+
+  timer = 0;
 
   async componentDidMount() {
     const { history } = this.props;
@@ -37,6 +42,10 @@ class MainGame extends React.Component {
     }
   }
 
+  setTimer = (newTimer) => {
+    this.timer = newTimer;
+  };
+
   embaralhar = (xablau) => xablau.sort(() => Math.random() - numero);
 
   criaOpcoes = () => {
@@ -50,24 +59,26 @@ class MainGame extends React.Component {
 
   handleScore = (isCorrect) => {
     const { dados } = this.state;
-    const { time, score, dispatch } = this.props;
+    const { score, dispatch } = this.props;
     const formula = 10;
     console.log(isCorrect, 'isCorrect');
-    if (isCorrect === 'correct-answer') {
+    if (isCorrect === CORRECT_ANSWER) {
       const questionsArray = dados[0];
       console.log(questionsArray);
       const difficultyQuestion = questionsArray.difficulty;
       const valueDifficulty = { hard: 3, medium: 2, easy: 1 };
-      const scoreValue = formula + (time * valueDifficulty[difficultyQuestion]);
+      const scoreValue = formula + (this.timer * valueDifficulty[difficultyQuestion]);
+      console.log('time', this.timer);
+      console.log(valueDifficulty[difficultyQuestion]);
       const sum = score + scoreValue;
       dispatch(implementScore(sum, 1));
-      this.setState({
-        expired: true,
-      });
-    } else {
-      this.setState({
-        expired: true,
-      });
+      // this.setState({
+      // expired: true,
+      // });
+    // } else {
+      // this.setState({
+      // expired: true,
+      // });
     }
   };
 
@@ -96,6 +107,14 @@ class MainGame extends React.Component {
     this.handleScore(isCorrect);
   };
 
+  handleTimer = () => {
+    this.setState({
+      isDisabled: true,
+      nextBtn: true,
+
+    });
+  };
+
   render() {
     const { dados, resposta, habilitBorder, nextBtn, isDisabled } = this.state;
     console.log(dados[0]?.question);
@@ -110,22 +129,37 @@ class MainGame extends React.Component {
             <button
               key={ i }
               data-testid={ dado === dados[0]
-                .correct_answer ? 'correct-answer' : `wrong-answer-${i}` }
+                .correct_answer ? CORRECT_ANSWER : `wrong-answer-${i}` }
               onClick={
                 () => this.handleClick(dado === dados[0]
-                  .correct_answer ? 'correct-answer' : `wrong-answer-${i}`)
+                  .correct_answer ? CORRECT_ANSWER : `wrong-answer-${i}`)
               }
               className={ habilitBorder && (dado === dados[0]
                 .correct_answer ? 'green' : 'red') }
+              disabled={ isDisabled }
             >
               { dado }
             </button>
           ))}
         </div>
+        { nextBtn && (
+          <button
+            data-testid="btn-next"
+          >
+            Next
+          </button>
+        )}
+
+        <Timer handleTimer={ this.handleTimer } setTimer={ this.setTimer } />
       </div>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  name: state.player.name,
+  gravatarEmail: state.player.gravatarEmail,
+  score: state.player.score,
+});
 
 MainGame.propTypes = {
   history: PropTypes.shape({
@@ -134,4 +168,4 @@ MainGame.propTypes = {
   }),
 }.isRequired;
 
-export default connect()(MainGame);
+export default connect(mapStateToProps)(MainGame);

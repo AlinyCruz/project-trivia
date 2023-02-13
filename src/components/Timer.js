@@ -20,6 +20,9 @@ class Timer extends React.Component {
 
   componentDidUpdate(_prevProps, prevState) {
     const SECONDS = 0;
+    const { setTimer } = this.props;
+    const { seconds } = this.state;
+    setTimer(seconds);
     if (prevState.seconds === SECONDS) {
       const { handleTimer } = this.props;
       handleTimer();
