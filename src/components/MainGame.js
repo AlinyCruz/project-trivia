@@ -12,6 +12,8 @@ class MainGame extends React.Component {
     dados: [],
     resposta: [],
     habilitBorder: false,
+    nextBtn: false,
+    pergunta: 0,
     isDisabled: false,
   };
 
@@ -54,6 +56,7 @@ class MainGame extends React.Component {
     // const { habilitBorder } = this.state;
     this.setState({
       habilitBorder: true,
+      nextBtn: true,
 
     });
   };
@@ -66,7 +69,7 @@ class MainGame extends React.Component {
   };
 
   render() {
-    const { dados, resposta, habilitBorder, isDisabled } = this.state;
+    const { dados, resposta, habilitBorder, nextBtn, pergunta, isDisabled } = this.state;
     console.log(dados[0]?.question);
     return (
       <div>
@@ -75,6 +78,7 @@ class MainGame extends React.Component {
           <p data-testid="question-category">{dados[0]?.category}</p>
         </div>
         <div data-testid="answer-options">
+          { pergunta}
           {resposta && resposta?.map((dado, i) => (
             <button
               key={ i }
@@ -91,6 +95,14 @@ class MainGame extends React.Component {
             </button>
           ))}
         </div>
+        { nextBtn && (
+          <button
+            data-testid="btn-next"
+          >
+            Next
+          </button>
+        )}
+
         <Timer handleTimer={ this.handleTimer } />
       </div>
     );
