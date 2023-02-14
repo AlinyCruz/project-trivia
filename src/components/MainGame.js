@@ -18,7 +18,6 @@ class MainGame extends React.Component {
     isDisabled: false,
     contador: 0,
     opcoes: [],
-
   };
 
   timer = 0;
