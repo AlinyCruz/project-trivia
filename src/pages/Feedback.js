@@ -15,7 +15,7 @@ class Feedback extends React.Component {
   };
 
   render() {
-    const { name, score, gravatarEmail } = this.props;
+    const { name, score, gravatarEmail, assertions } = this.props;
     console.log(gravatarEmail);
     const hash = md5(gravatarEmail).toString();
     const url = `https://www.gravatar.com/avatar/${hash}`;
@@ -23,24 +23,25 @@ class Feedback extends React.Component {
       <div>
         <header>
           <div>
-            <img src={ url } alt="gravatar" data-testid="header-profile-picture" />
+            <img
+              src={ url }
+              alt="gravatar"
+              data-testid="header-profile-picture"
+            />
           </div>
-          Feedback
-          <h3 data-testid="header-player-name">
-            { name }
-          </h3>
-          <p data-testid="header-score">{ score }</p>
+          <span data-testid="feedback-text">Feedback</span>
+          <h3 data-testid="header-player-name">{name}</h3>
+          <p data-testid="header-score">
+            <span data-testid="feedback-total-score">{score}</span>
+          </p>
+          <p data-testid="feedback-total-question">
+            { assertions }
+          </p>
         </header>
-        <button
-          data-testid="btn-play-again"
-          onClick={ this.handlePlayAgain }
-        >
+        <button data-testid="btn-play-again" onClick={ this.handlePlayAgain }>
           Play Again
         </button>
-        <button
-          data-testid="btn-ranking"
-          onClick={ this.handleRanking }
-        >
+        <button data-testid="btn-ranking" onClick={ this.handleRanking }>
           Ranking
         </button>
       </div>
@@ -51,10 +52,12 @@ const mapStateToProps = (state) => ({
   name: state.player.name,
   gravatarEmail: state.player.gravatarEmail,
   score: state.player.score,
+  assertions: state.player.assertions,
 });
 
 Feedback.propTypes = {
   score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   gravatarEmail: PropTypes.string.isRequired,
   history: PropTypes.shape({
