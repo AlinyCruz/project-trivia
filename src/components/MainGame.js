@@ -81,6 +81,7 @@ class MainGame extends React.Component {
       this.criaOpcoes();
     });
   };
+  // testa comentar para commit
 
   handleScore = (isCorrect) => {
     const { dados } = this.state;
@@ -127,7 +128,7 @@ class MainGame extends React.Component {
     // const { habilitBorder } = this.state;
     this.setState({
       habilitBorder: true,
-
+      nextBtn: true,
     });
     this.handleScore(isCorrect);
   };
@@ -135,8 +136,6 @@ class MainGame extends React.Component {
   handleTimer = () => {
     this.setState({
       isDisabled: true,
-      nextBtn: true,
-
     });
   };
 
