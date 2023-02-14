@@ -6,7 +6,7 @@ import Timer from './Timer';
 import { implementScore } from '../redux/actions';
 
 const numero = 0.5;
-const opcoes = [];
+// const opcoes = [];
 const CORRECT_ANSWER = 'correct-answer';
 
 class MainGame extends React.Component {
@@ -16,6 +16,8 @@ class MainGame extends React.Component {
     habilitBorder: false,
     nextBtn: false,
     isDisabled: false,
+    contador: 0,
+    opcoes: [],
   };
 
   timer = 0;
@@ -42,6 +44,10 @@ class MainGame extends React.Component {
     }
   }
 
+  // handleFeedback = () => {
+  //   const { history } = this.props;
+  //   history.push('/feedback');
+  // };
   setTimer = (newTimer) => {
     this.timer = newTimer;
   };
@@ -49,11 +55,30 @@ class MainGame extends React.Component {
   embaralhar = (xablau) => xablau.sort(() => Math.random() - numero);
 
   criaOpcoes = () => {
-    const { dados } = this.state;
-    opcoes.push(...dados[0].incorrect_answers.map((e) => e));
-    opcoes.push(dados[0].correct_answer);
+    const { dados, contador, opcoes } = this.state;
+    opcoes.push(...dados[contador].incorrect_answers.map((e) => e));
+    opcoes.push(dados[contador].correct_answer);
     this.setState({
       resposta: this.embaralhar(opcoes),
+    });
+  };
+
+  handleNext = () => {
+    const { history } = this.props;
+    this.setState((prevState) => ({
+      contador: prevState.contador + 1,
+      habilitBorder: false,
+      nextBtn: false,
+      isDisabled: false,
+      resposta: [],
+      opcoes: [],
+    }), () => {
+      const countOpcoes = 5;
+      const { contador } = this.state;
+      if (contador === countOpcoes) {
+        return history.push('/feedback');
+      }
+      this.criaOpcoes();
     });
   };
 
@@ -116,25 +141,26 @@ class MainGame extends React.Component {
   };
 
   render() {
-    const { dados, resposta, habilitBorder, nextBtn, isDisabled } = this.state;
-    console.log(dados[0]?.question);
+    const { dados, resposta, habilitBorder, nextBtn, isDisabled, contador } = this.state;
+    console.log(dados[contador]?.question);
+    console.log(contador);
     return (
       <div>
         <div>
-          <p data-testid="question-text">{dados[0]?.question}</p>
-          <p data-testid="question-category">{dados[0]?.category}</p>
+          <p data-testid="question-text">{dados[contador]?.question}</p>
+          <p data-testid="question-category">{dados[contador]?.category}</p>
         </div>
         <div data-testid="answer-options">
           {resposta && resposta?.map((dado, i) => (
             <button
               key={ i }
-              data-testid={ dado === dados[0]
+              data-testid={ dado === dados[contador]
                 .correct_answer ? CORRECT_ANSWER : `wrong-answer-${i}` }
               onClick={
-                () => this.handleClick(dado === dados[0]
+                () => this.handleClick(dado === dados[contador]
                   .correct_answer ? CORRECT_ANSWER : `wrong-answer-${i}`)
               }
-              className={ habilitBorder && (dado === dados[0]
+              className={ habilitBorder && (dado === dados[contador]
                 .correct_answer ? 'green' : 'red') }
               disabled={ isDisabled }
             >
@@ -145,11 +171,19 @@ class MainGame extends React.Component {
         { nextBtn && (
           <button
             data-testid="btn-next"
+            onClick={ this.handleNext }
           >
             Next
           </button>
         )}
 
+        {/* <Timer handleTimer={ this.handleTimer } /> */}
+
+        {/* <button
+          onClick={ this.handleFeedback }
+        >
+          Feedback
+        </button> */}
         <Timer handleTimer={ this.handleTimer } setTimer={ this.setTimer } />
       </div>
     );

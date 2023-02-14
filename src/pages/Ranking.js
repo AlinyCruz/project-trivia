@@ -1,12 +1,13 @@
+// import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
 class Ranking extends React.Component {
   render() {
     return (
-      <h2>
-        Você esta na pagina de Ranking!!!
-      </h2>
+      <h1 data-testid="ranking-title">
+        Ranking
+      </h1>
     );
   }
 }
