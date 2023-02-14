@@ -22,6 +22,7 @@ class Feedback extends React.Component {
     return (
       <div>
         <header>
+          <span data-testid="feedback-text">Feedback</span>
           <div>
             <img
               src={ url }

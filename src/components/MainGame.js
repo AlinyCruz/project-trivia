@@ -81,6 +81,7 @@ class MainGame extends React.Component {
       this.criaOpcoes();
     });
   };
+  // testa comentar para commit
 
   handleScore = (isCorrect) => {
     const { dados } = this.state;
