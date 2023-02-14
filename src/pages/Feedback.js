@@ -22,10 +22,10 @@ class Feedback extends React.Component {
     return (
       <div>
         <header>
+          <span data-testid="feedback-text">Feedback</span>
           <div>
             <img src={ url } alt="gravatar" data-testid="header-profile-picture" />
           </div>
-          Feedback
           <h3 data-testid="header-player-name">
             { name }
           </h3>
