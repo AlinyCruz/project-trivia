@@ -5,7 +5,6 @@ import './MainGame.css';
 import Timer from './Timer';
 
 const numero = 0.5;
-const opcoes = [];
 
 class MainGame extends React.Component {
   state = {
@@ -14,6 +13,9 @@ class MainGame extends React.Component {
     habilitBorder: false,
     nextBtn: false,
     isDisabled: false,
+    contador: 0,
+    opcoes: [],
+
   };
 
   async componentDidMount() {
@@ -40,14 +42,38 @@ class MainGame extends React.Component {
     }
   }
 
+  // handleFeedback = () => {
+  //   const { history } = this.props;
+  //   history.push('/feedback');
+  // };
+
   embaralhar = (xablau) => xablau.sort(() => Math.random() - numero);
 
   criaOpcoes = () => {
-    const { dados } = this.state;
-    opcoes.push(...dados[0].incorrect_answers.map((e) => e));
-    opcoes.push(dados[0].correct_answer);
+    const { dados, contador, opcoes } = this.state;
+    opcoes.push(...dados[contador].incorrect_answers.map((e) => e));
+    opcoes.push(dados[contador].correct_answer);
     this.setState({
       resposta: this.embaralhar(opcoes),
+    });
+  };
+
+  handleNext = () => {
+    const { history } = this.props;
+    this.setState((prevState) => ({
+      contador: prevState.contador + 1,
+      habilitBorder: false,
+      nextBtn: false,
+      isDisabled: false,
+      resposta: [],
+      opcoes: [],
+    }), () => {
+      const countOpcoes = 5;
+      // eslint-disable-next-line react/destructuring-assignment
+      if (this.state.contador === countOpcoes) {
+        return history.push('/feedback');
+      }
+      this.criaOpcoes();
     });
   };
 
@@ -68,24 +94,25 @@ class MainGame extends React.Component {
   };
 
   render() {
-    const { dados, resposta, habilitBorder, nextBtn, isDisabled } = this.state;
-    console.log(dados[0]?.question);
+    const { dados, resposta, habilitBorder, nextBtn, isDisabled, contador } = this.state;
+    console.log(dados[contador]?.question);
+    console.log(contador);
     return (
       <div>
         <div>
-          <p data-testid="question-text">{dados[0]?.question}</p>
-          <p data-testid="question-category">{dados[0]?.category}</p>
+          <p data-testid="question-text">{dados[contador]?.question}</p>
+          <p data-testid="question-category">{dados[contador]?.category}</p>
         </div>
         <div data-testid="answer-options">
           {resposta && resposta?.map((dado, i) => (
             <button
               key={ i }
-              data-testid={ dado === dados[0]
+              data-testid={ dado === dados[contador]
                 .correct_answer ? 'correct-answer' : `wrong-answer-${i}` }
               onClick={
                 () => this.handleClick()
               }
-              className={ habilitBorder && (dado === dados[0]
+              className={ habilitBorder && (dado === dados[contador]
                 .correct_answer ? 'green' : 'red') }
               disabled={ isDisabled }
             >
@@ -96,12 +123,19 @@ class MainGame extends React.Component {
         { nextBtn && (
           <button
             data-testid="btn-next"
+            onClick={ this.handleNext }
           >
             Next
           </button>
         )}
 
         <Timer handleTimer={ this.handleTimer } />
+
+        {/* <button
+          onClick={ this.handleFeedback }
+        >
+          Feedback
+        </button> */}
       </div>
     );
   }
