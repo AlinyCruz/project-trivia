@@ -69,8 +69,8 @@ class MainGame extends React.Component {
       opcoes: [],
     }), () => {
       const countOpcoes = 5;
-      // eslint-disable-next-line react/destructuring-assignment
-      if (this.state.contador === countOpcoes) {
+      const { contador } = this.state;
+      if (contador === countOpcoes) {
         return history.push('/feedback');
       }
       this.criaOpcoes();
