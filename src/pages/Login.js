@@ -63,31 +63,31 @@ class Login extends React.Component {
     const { email, name, isDisabled } = this.state;
     return (
       <div className="login">
-        {/* <img
-          id="img-trivia"
-          src="src/trivia.png"
-          // width="300px"
-          alt="img-trivia"
-        /> */}
         <form className="form">
+          <div className="label-name">
+            Player Game
+          </div>
           <input
             name="name"
             value={ name }
             type="text"
             onChange={ this.handleChange }
             data-testid="input-player-name"
-            placeholder="Player name"
+            // placeholder="Player name"
             className="input-name"
           />
           <br />
           <br />
+          <div className="label-email">
+            Email
+          </div>
           <input
             name="email"
             value={ email }
             type="email"
             onChange={ this.handleChange }
             data-testid="input-gravatar-email"
-            placeholder="Email"
+            // placeholder="Email"
             className="input-email"
           />
           <br />
