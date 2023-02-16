@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { actionNome, fetchToken } from '../redux/actions';
+import './Login.css';
 
 class Login extends React.Component {
   state = {
@@ -61,27 +62,42 @@ class Login extends React.Component {
   render() {
     const { email, name, isDisabled } = this.state;
     return (
-      <div>
-        <form>
-          <input
-            name="email"
-            value={ email }
-            type="email"
-            onChange={ this.handleChange }
-            data-testid="input-gravatar-email"
-          />
+      <div className="login">
+        {/* <img
+          id="img-trivia"
+          src="src/trivia.png"
+          // width="300px"
+          alt="img-trivia"
+        /> */}
+        <form className="form">
           <input
             name="name"
             value={ name }
             type="text"
             onChange={ this.handleChange }
             data-testid="input-player-name"
+            placeholder="Player name"
+            className="input-name"
           />
+          <br />
+          <br />
+          <input
+            name="email"
+            value={ email }
+            type="email"
+            onChange={ this.handleChange }
+            data-testid="input-gravatar-email"
+            placeholder="Email"
+            className="input-email"
+          />
+          <br />
+          <br />
           <button
             type="button"
             disabled={ isDisabled }
             data-testid="btn-play"
             onClick={ () => this.paginaGame('/game') }
+            className="button-play"
           >
             Play
           </button>
@@ -90,8 +106,9 @@ class Login extends React.Component {
             type="button"
             data-testid="btn-settings"
             onClick={ () => this.paginaSetting('/settings') }
+            className="button-setting"
           >
-            Configurações
+            Settings
           </button>
         </form>
       </div>

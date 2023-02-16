@@ -1,0 +1,65 @@
+body {
+background-color: rgb(46, 44, 44);
+text-align: center;
+/* background-image: url(https://static.vecteezy.com/system/resources/previews/014/518/748/original/yellow-question-mark-background-with-text-space-quiz-symbol-vector.jpg); */
+position: absolute;
+width: 1280px;
+height: 759px;
+left: 0px;
+top: 0px;
+/* background: url(25235.jpg); */
+/* mix-blend-mode: multiply; */
+/* filter: blur(4px); */
+}
+
+.login {
+  /* Background-image: url('../trivia.png') */
+  
+}
+
+.form {
+  position: absolute;
+  width: 614px;
+  height: 333px;
+  left: 333px;
+  top: 316px;
+  background: #FFFFFF;
+  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;  
+}
+
+.button-play {
+  position: absolute;
+  width: 300px;
+  height: 40px;
+  left: 150px;
+  top: 150px;
+  background: #fcf341;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.button-setting {
+  position: absolute;
+  width: 300px;
+  height: 40px;
+  left: 150px;
+  top: 206px;
+  background: #fcf341;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.input-email {
+
+}
+
+
+.input-name {
+
+}
+
+
+
+
+
