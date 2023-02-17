@@ -10,18 +10,18 @@ class Header extends React.Component {
     const hash = md5(gravatarEmail).toString();
     const url = `https://www.gravatar.com/avatar/${hash}`;
     return (
-      <div>
-        <header>
-          <div>
-            <img src={ url } alt="gravatar" data-testid="header-profile-picture" />
-          </div>
+      <header>
+        <div>
+          <img src={ url } alt="gravatar" data-testid="header-profile-picture" />
+        </div>
+        <div className="score">
           Bem Vindo,
           <h3 data-testid="header-player-name">
             { name }
           </h3>
           <p data-testid="header-score">{ score }</p>
-        </header>
-      </div>
+        </div>
+      </header>
     );
   }
 }

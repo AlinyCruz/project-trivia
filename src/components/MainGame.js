@@ -144,12 +144,22 @@ class MainGame extends React.Component {
     console.log(dados[contador]?.question);
     console.log(contador);
     return (
-      <div>
-        <div>
-          <p data-testid="question-text">{dados[contador]?.question}</p>
-          <p data-testid="question-category">{dados[contador]?.category}</p>
+      <div className="main-game">
+        <div className="perguntas">
+          <p
+            className="pergunta"
+            data-testid="question-text"
+          >
+            {dados[contador]?.question}
+          </p>
+          <p
+            className="entretenimento"
+            data-testid="question-category"
+          >
+            {dados[contador]?.category}
+          </p>
         </div>
-        <div data-testid="answer-options">
+        <div data-testid="answer-options" className="botoes-respostas">
           {resposta && resposta?.map((dado, i) => (
             <button
               key={ i }
@@ -169,6 +179,7 @@ class MainGame extends React.Component {
         </div>
         { nextBtn && (
           <button
+            className="proximo"
             data-testid="btn-next"
             onClick={ this.handleNext }
           >

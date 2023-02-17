@@ -1,8 +1,10 @@
 .red {
   border: 3px solid red;
+  font-family: Anton , sans-serif;
 }
 
 .green {
   border: 3px solid rgb(6, 240, 15);
+  font-family: Anton , sans-serif;
 }
 

@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { actionNome, fetchToken } from '../redux/actions';
-import './Login.css';
+import '../App.css';
+import trivia from '../trivia.png';
 
 class Login extends React.Component {
   state = {
@@ -62,55 +63,56 @@ class Login extends React.Component {
   render() {
     const { email, name, isDisabled } = this.state;
     return (
-      <div className="login">
-        <form className="form">
-          <div className="label-name">
-            Player Game
-          </div>
-          <input
-            name="name"
-            value={ name }
-            type="text"
-            onChange={ this.handleChange }
-            data-testid="input-player-name"
-            // placeholder="Player name"
-            className="input-name"
-          />
-          <br />
-          <br />
-          <div className="label-email">
-            Email
-          </div>
-          <input
-            name="email"
-            value={ email }
-            type="email"
-            onChange={ this.handleChange }
-            data-testid="input-gravatar-email"
-            // placeholder="Email"
-            className="input-email"
-          />
-          <br />
-          <br />
-          <button
-            type="button"
-            disabled={ isDisabled }
-            data-testid="btn-play"
-            onClick={ () => this.paginaGame('/game') }
-            className="button-play"
-          >
-            Play
-          </button>
+      <div className="header-trivia">
+        <img src={ trivia } alt="Trivia" className="trivia" />
+        <div className="login">
+          <form className="form">
+            <div className="label-name">
+              Player Game
+            </div>
+            <input
+              name="name"
+              value={ name }
+              type="text"
+              onChange={ this.handleChange }
+              data-testid="input-player-name"
+              // placeholder="Player name"
+              className="input-name"
+            />
 
-          <button
-            type="button"
-            data-testid="btn-settings"
-            onClick={ () => this.paginaSetting('/settings') }
-            className="button-setting"
-          >
-            Settings
-          </button>
-        </form>
+            <div className="label-email">
+              Email
+            </div>
+            <input
+              name="email"
+              value={ email }
+              type="email"
+              onChange={ this.handleChange }
+              data-testid="input-gravatar-email"
+              // placeholder="Email"
+              className="input-email"
+            />
+
+            <button
+              type="button"
+              disabled={ isDisabled }
+              data-testid="btn-play"
+              onClick={ () => this.paginaGame('/game') }
+              className="button-play"
+            >
+              Play
+            </button>
+
+            <button
+              type="button"
+              data-testid="btn-settings"
+              onClick={ () => this.paginaSetting('/settings') }
+              className="button-setting"
+            >
+              Settings
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

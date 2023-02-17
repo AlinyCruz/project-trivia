@@ -22,7 +22,7 @@ class Game extends React.Component {
   render() {
     const { history } = this.props;
     return (
-      <div>
+      <div className="game">
         <Header />
         <MainGame history={ history } />
       </div>
