@@ -48,7 +48,7 @@ Pessoas que contribuíram para este projeto:
     </td>
     <td align="center" style="font-family: Franklin Gothic Medium, sans-serif;">
       <a href="https://github.com/Alvaro-Bettoni">
-        <img src="https://avatars.githubusercontent.com/u/80923598?v=4" width="180px;" alt="Foto de Alvaro no GitHub" style="border-radius:50%;"/><br>
+        <img src="https://avatars.githubusercontent.com/u/80923598?v=4" width="100px;" alt="Foto de Alvaro no GitHub" style="border-radius:50%;"/><br>
         <sub>
           <b style="font-size:15px;">Alvaro Bettoni</b>
         </sub>
@@ -65,7 +65,7 @@ Pessoas que contribuíram para este projeto:
     </td>
     <td align="center" style="font-family: Franklin Gothic Medium, sans-serif;">
       <a href="https://github.com/camilaskaf">
-        <img src="https://avatars.githubusercontent.com/u/113205359?v=4" width="180px;" alt="Foto de Camila no GitHub" style="border-radius:50%;"/><br>
+        <img src="https://avatars.githubusercontent.com/u/113205359?v=4" width="100px;" alt="Foto de Camila no GitHub" style="border-radius:50%;"/><br>
         <sub>
           <b style="font-size:15px;">Camila Skaf</b>
         </sub>
@@ -73,7 +73,7 @@ Pessoas que contribuíram para este projeto:
     </td>
     <td align="center" style="font-family: Franklin Gothic Medium, sans-serif;">
       <a href="https://github.com/AlinyCruz">
-        <img src="https://avatars.githubusercontent.com/u/108740455?v=4" width="300px;" alt="Foto de Aline no GitHub" style="border-radius:50%;"/><br>
+        <img src="https://avatars.githubusercontent.com/u/108740455?v=4" width="100px;" alt="Foto de Aline no GitHub" style="border-radius:50%;"/><br>
         <sub>
           <b style="font-size:15px;">
             Aline Cruz</b>
